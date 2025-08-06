@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, Text, StyleSheet, TouchableOpacity, Image, Alert, Animated } from 'react-native';
 import { PanGestureHandler, State } from 'react-native-gesture-handler';
-import { User, Calendar, MapPin, Heart, Phone, Trash2 } from 'lucide-react-native';
+import { User, Calendar, MapPin, Heart, Phone, Trash2, Tag } from 'lucide-react-native';
 import { format, parseISO } from 'date-fns';
 
 interface Profile {
@@ -228,6 +228,26 @@ export function ProfileCard({ profile, onPress, onDelete, theme }: ProfileCardPr
 
               {/* Additional Info Row */}
               <View style={styles.additionalInfo}>
+                {profile.tags && profile.tags.length > 0 && (
+                  <View style={styles.tagsContainer}>
+                    {profile.tags.slice(0, 2).map((tag, index) => (
+                      <View key={index} style={[styles.tagChip, { backgroundColor: theme.accent }]}>
+                        <Tag size={10} color={theme.primary} />
+                        <Text style={[styles.tagChipText, { color: theme.primary }]}>
+                          {typeof tag === 'string' ? tag : tag.text}
+                        </Text>
+                      </View>
+                    ))}
+                    {profile.tags.length > 2 && (
+                      <View style={[styles.tagChip, { backgroundColor: theme.accent }]}>
+                        <Text style={[styles.tagChipText, { color: theme.primary }]}>
+                          +{profile.tags.length - 2}
+                        </Text>
+                      </View>
+                    )}
+                  </View>
+                )}
+                
                 {profile.kids && profile.kids.length > 0 && (
                   <View style={styles.infoChip}>
                     <Heart size={12} color="#EC4899" />
@@ -391,6 +411,24 @@ const styles = StyleSheet.create({
     flexWrap: 'wrap',
     marginBottom: 12,
     gap: 6,
+  },
+  tagsContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    marginBottom: 6,
+    gap: 4,
+  },
+  tagChip: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 6,
+    paddingVertical: 3,
+    borderRadius: 8,
+  },
+  tagChipText: {
+    fontSize: 10,
+    fontWeight: '500',
+    marginLeft: 3,
   },
   infoChip: {
     flexDirection: 'row',
