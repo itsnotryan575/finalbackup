@@ -18,7 +18,7 @@ interface DevNoteModalProps {
 
 export function DevNoteModal({ visible, onClose }: DevNoteModalProps) {
   const { isDark } = useTheme();
-  const [dontShowAgain, setDontShowAgain] = React.useState(false);
+  const [dontShowAgain, setDontShowAgain] = useState(false);
 
   const theme = {
     text: '#f0f0f0',
@@ -154,40 +154,41 @@ export function DevNoteModal({ visible, onClose }: DevNoteModalProps) {
 
             {/* Footer */}
             <View style={[styles.footer, { borderTopColor: theme.border }]}>
+              {/* Don't Show Again Option */}
+              <View style={[styles.checkboxContainer, { backgroundColor: theme.accent, borderColor: theme.border }]}>
+                <TouchableOpacity
+                  style={styles.checkboxRow}
+                  onPress={() => setDontShowAgain(!dontShowAgain)}
+                >
+                  <View style={[
+                    styles.checkbox,
+                    { 
+                      backgroundColor: dontShowAgain ? theme.secondary : 'transparent',
+                      borderColor: theme.border 
+                    }
+                  ]}>
+                    {dontShowAgain && (
+                      <Check size={16} color="#FFFFFF" />
+                    )}
+                  </View>
+                  <Text style={[styles.checkboxText, { color: theme.text }]}>
+                    Don't show this message again
+                  </Text>
+                </TouchableOpacity>
+                <Text style={[styles.checkboxSubtext, { color: theme.primary }]}>
+                  You can always find app updates and information in Settings → About
+                </Text>
+              </View>
+
               <TouchableOpacity
                 style={[styles.acknowledgeButton, { backgroundColor: theme.secondary }]}
-                onPress={onClose}
+                onPress={() => onClose(dontShowAgain)}
               >
                 <Text style={styles.acknowledgeButtonText}>Got it, let's explore!</Text>
               </TouchableOpacity>
             </View>
           </View>
         </SafeAreaView>
-          {/* Don't Show Again Option */}
-          <View style={[styles.checkboxContainer, { backgroundColor: theme.accent, borderColor: theme.border }]}>
-            <TouchableOpacity
-              style={styles.checkboxRow}
-              onPress={() => onClose(dontShowAgain)}
-            >
-              <View style={[
-                styles.checkbox,
-                { 
-                  backgroundColor: dontShowAgain ? theme.secondary : 'transparent',
-                  borderColor: theme.border 
-                }
-              ]}>
-                {dontShowAgain && (
-                  <Check size={16} color="#FFFFFF" />
-                )}
-              </View>
-              <Text style={[styles.checkboxText, { color: theme.text }]}>
-                Don't show this message again
-              </Text>
-            </TouchableOpacity>
-            <Text style={[styles.checkboxSubtext, { color: theme.primary }]}>
-              You can always find app updates and information in Settings → About
-            </Text>
-          </View>
 
       </View>
     </Modal>
