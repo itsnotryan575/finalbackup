@@ -8,7 +8,8 @@ import {
   TextInput, 
   Alert,
   SafeAreaView,
-  Modal
+  Modal,
+  Image
 } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { ArrowLeft, Save, Plus, X, User, Palette, Calendar, ChevronLeft, ChevronRight } from 'lucide-react-native';
