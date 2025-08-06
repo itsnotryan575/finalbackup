@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, SafeAreaView, Image } from 'react-native';
 import { useLocalSearchParams, useRouter } from 'expo-router';
 import { useFocusEffect } from '@react-navigation/native';
 import { ArrowLeft, CreditCard as Edit, User, Calendar, MapPin, Heart, Briefcase, Phone, Mail, Tag } from 'lucide-react-native';
@@ -135,9 +135,13 @@ export default function ProfileDetail() {
       <ScrollView style={styles.content} showsVerticalScrollIndicator={false}>
         {/* Profile Header */}
         <View style={[styles.profileHeader, { backgroundColor: theme.cardBackground }]}>
-          <View style={[styles.avatar, { backgroundColor: theme.accent }]}>
-            <Text style={[styles.avatarText, { color: theme.text }]}>{getInitials(profile.name)}</Text>
-          </View>
+          {profile.photoUri ? (
+            <Image source={{ uri: profile.photoUri }} style={styles.avatar} />
+          ) : (
+            <View style={[styles.avatar, { backgroundColor: theme.accent }]}>
+              <Text style={[styles.avatarText, { color: theme.text }]}>{getInitials(profile.name)}</Text>
+            </View>
+          )}
           <Text style={[styles.name, { color: theme.text }]}>{profile.name}</Text>
           
           <View style={[
