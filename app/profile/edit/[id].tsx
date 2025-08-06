@@ -310,7 +310,7 @@ export default function EditProfile() {
                     <X size={16} color="#FFFFFF" />
                   </TouchableOpacity>
                   <TouchableOpacity
-                    style={[styles.replacePhotoButton, { backgroundColor: theme.secondary }]}
+                    style={[styles.replacePhotoButton, { backgroundColor: isDark ? theme.secondary : '#015A3A' }]}
                     onPress={handleAddPhoto}
                   >
                     <Camera size={16} color="#FFFFFF" />

@@ -246,7 +246,7 @@ export default function CreateProfile() {
                 <View style={styles.photoPreview}>
                   <Image source={{ uri: selectedImage.uri }} style={styles.profilePhoto} />
                   <TouchableOpacity
-                    style={[styles.removePhotoButton, { backgroundColor: '#EF4444' }]}
+                    style={[styles.replacePhotoButton, { backgroundColor: isDark ? theme.secondary : '#015A3A' }]}
                     onPress={handleRemovePhoto}
                   >
                     <X size={16} color="#FFFFFF" />
