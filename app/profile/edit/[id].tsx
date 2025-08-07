@@ -61,11 +61,12 @@ export default function EditProfile() {
   const theme = {
     text: '#f0f0f0',
     background: isDark ? '#0B0909' : '#003C24',
-    primary: isDark ? '#8C8C8C' : '#f0f0f0',
+    primary: isDark ? '#8C8C8C' : '#8C8C8C',
     secondary: isDark ? '#4A5568' : '#012d1c',
-    accent: isDark ? '#44444C' : '#002818',
+    accent: isDark ? '#44444C' : '#f0f0f0',
     cardBackground: isDark ? '#1A1A1A' : '#002818',
     border: isDark ? '#333333' : '#012d1c',
+    inputText: isDark ? '#f0f0f0' : '#003C24',
     isDark,
   };
 
@@ -331,7 +332,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Name *</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.name || ''}
               onChangeText={(text) => updateField('name', text)}
               placeholder="Enter name"
@@ -342,7 +343,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Age</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.age?.toString() || ''}
               onChangeText={(text) => updateField('age', text ? parseInt(text) || null : null)}
               placeholder="Enter age"
@@ -388,7 +389,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Job</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.job || ''}
               onChangeText={(text) => updateField('job', text)}
               placeholder="Enter job/occupation"
@@ -404,7 +405,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Phone</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.phone || ''}
               onChangeText={(text) => updateField('phone', text)}
               placeholder="Enter phone number"
@@ -416,7 +417,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Email</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.email || ''}
               onChangeText={(text) => updateField('email', text)}
               placeholder="Enter email address"
@@ -434,7 +435,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Parents</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.parentsText || ''}
               onChangeText={(text) => {
                 updateField('parentsText', text);
@@ -448,7 +449,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Children</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.kidsText || ''}
               onChangeText={(text) => {
                 updateField('kidsText', text);
@@ -462,7 +463,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Brothers</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.brothersText || ''}
               onChangeText={(text) => {
                 updateField('brothersText', text);
@@ -476,7 +477,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Sisters</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.sistersText || ''}
               onChangeText={(text) => {
                 updateField('sistersText', text);
@@ -490,7 +491,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Other Siblings</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.siblingsText || ''}
               onChangeText={(text) => {
                 updateField('siblingsText', text);
@@ -509,7 +510,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Likes</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.foodLikesText || ''}
               onChangeText={(text) => {
                 updateField('foodLikesText', text);
@@ -523,7 +524,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Dislikes</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.foodDislikesText || ''}
               onChangeText={(text) => {
                 updateField('foodDislikesText', text);
@@ -537,7 +538,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Interests</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.interestsText || ''}
               onChangeText={(text) => {
                 updateField('interestsText', text);
@@ -556,7 +557,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Instagram</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.instagram || ''}
               onChangeText={(text) => updateField('instagram', text)}
               placeholder="@username or profile link"
@@ -567,7 +568,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Snapchat</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.snapchat || ''}
               onChangeText={(text) => updateField('snapchat', text)}
               placeholder="@username"
@@ -578,7 +579,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>X (Twitter)</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.twitter || ''}
               onChangeText={(text) => updateField('twitter', text)}
               placeholder="@username"
@@ -589,7 +590,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>TikTok</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.tiktok || ''}
               onChangeText={(text) => updateField('tiktok', text)}
               placeholder="@username"
@@ -600,7 +601,7 @@ export default function EditProfile() {
           <View style={styles.inputGroup}>
             <Text style={[styles.label, { color: theme.primary }]}>Facebook</Text>
             <TextInput
-              style={[styles.input, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.input, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={profile.facebook || ''}
               onChangeText={(text) => updateField('facebook', text)}
               placeholder="Profile name or link"
@@ -641,7 +642,7 @@ export default function EditProfile() {
           {/* Add New Tag */}
           <View style={styles.addTagContainer}>
             <TextInput
-              style={[styles.tagInput, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+              style={[styles.tagInput, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
               value={newTag}
               onChangeText={setNewTag}
               placeholder="Add a tag..."
@@ -777,7 +778,7 @@ export default function EditProfile() {
         <View style={[styles.section, { backgroundColor: theme.cardBackground }]}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>Other Notes</Text>
           <TextInput
-            style={[styles.textArea, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+            style={[styles.textArea, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
             value={profile.notes || ''}
             onChangeText={(text) => updateField('notes', text)}
             placeholder="Add notes about this person..."
