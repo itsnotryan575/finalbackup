@@ -261,7 +261,7 @@ export function ProfileCard({ profile, onPress, onDelete, theme }: ProfileCardPr
                   <View style={styles.infoChip}>
                     <Phone size={12} color="#3B82F6" />
                     <Text style={[styles.infoChipText, { color: theme.primary }]}>
-                      Phone
+                      {profile.phone}
                     </Text>
                   </View>
                 )}
