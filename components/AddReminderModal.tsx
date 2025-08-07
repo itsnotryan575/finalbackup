@@ -69,10 +69,10 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
   // Enhanced theme for better light mode visibility
   const modalTheme = {
     ...theme,
-    inputText: theme.isDark ? '#f0f0f0' : '#003C24',
-    inputBackground: theme.accent,
-    inputBorder: theme.border,
-    placeholderColor: theme.primary,
+    inputText: isDark ? '#f0f0f0' : '#003C24',
+    inputBackground: isDark ? '#44444C' : '#002818',
+    inputBorder: isDark ? '#333333' : '#012d1c',
+    placeholderColor: isDark ? '#8C8C8C' : '#f0f0f0',
   };
   
   useEffect(() => {
