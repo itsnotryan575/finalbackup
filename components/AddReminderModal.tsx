@@ -70,9 +70,9 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
   const modalTheme = {
     ...theme,
     inputText: theme.isDark ? '#f0f0f0' : '#003C24',
-    inputBackground: theme.isDark ? theme.accent : '#f0f0f0',
-    inputBorder: theme.isDark ? theme.border : '#8C8C8C',
-    placeholderColor: theme.isDark ? theme.primary : '#8C8C8C',
+    inputBackground: theme.accent,
+    inputBorder: theme.border,
+    placeholderColor: theme.primary,
   };
   
   useEffect(() => {
