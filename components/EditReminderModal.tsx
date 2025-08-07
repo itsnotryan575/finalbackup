@@ -582,10 +582,10 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
               <ChevronRight size={24} color={theme.primary} />
             </TouchableOpacity>
           </View>
-                  style={[styles.quickDateOption, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
+
           <View style={styles.calendarContent}>
             <View style={styles.weekDays}>
-                  <Text style={[styles.quickDateText, { color: modalTheme.inputText }]}>
+              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
                 <Text key={day} style={[styles.weekDayText, { color: theme.primary }]}>
                   {day}
                 </Text>
@@ -790,10 +790,10 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
 
           <View style={[styles.footer, { borderTopColor: theme.border }]}>
             <TouchableOpacity
-              style={[styles.cancelButton, { backgroundColor: theme.cardBackground, borderColor: theme.border }]}
+              style={[styles.cancelButton, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
               onPress={handleClose}
             >
-              <Text style={[styles.cancelButtonText, { color: theme.text }]}>Cancel</Text>
+              <Text style={[styles.cancelButtonText, { color: modalTheme.inputText }]}>Cancel</Text>
             </TouchableOpacity>
             
             <TouchableOpacity
