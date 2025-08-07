@@ -362,7 +362,9 @@ export default function ProfileDetail() {
                   style={[
                     styles.tag, 
                     { 
-                      backgroundColor: isDark ? '#374151' : '#F3F4F6'
+                      backgroundColor: isDark 
+                        ? (typeof tag === 'object' && tag.color ? tag.color.dark : theme.accent)
+                        : (typeof tag === 'object' && tag.color ? tag.color.light : theme.accent)
                     }
                   ]}
                 >
