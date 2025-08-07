@@ -12,13 +12,13 @@ export default function AboutSettings() {
   const { isDark } = useTheme();
 
   const theme = {
-    text: isDark ? '#f0f0f0' : '#000000',
-    background: isDark ? '#0B0909' : '#E8F5E9',
-    primary: isDark ? '#8C8C8C' : '#666666',
+    text: '#f0f0f0',
+    background: isDark ? '#0B0909' : '#003C24',
+    primary: isDark ? '#8C8C8C' : '#f0f0f0',
     secondary: isDark ? '#4A5568' : '#012d1c',
-    accent: isDark ? '#44444C' : '#F0F4F0',
-    cardBackground: isDark ? '#1A1A1A' : '#DCE7DC',
-    border: isDark ? '#333333' : '#BDBDBD',
+    accent: isDark ? '#44444C' : '#002818',
+    cardBackground: isDark ? '#1A1A1A' : '#002818',
+    border: isDark ? '#333333' : '#012d1c',
     isDark,
   };
 
