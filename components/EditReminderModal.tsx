@@ -156,7 +156,7 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
         description: description.trim() || null,
         type: selectedType,
         profileId: selectedProfile,
-        scheduledFor: dateTimeString,
+        scheduledFor: scheduledDateTime.toISOString(),
       };
 
       await DatabaseService.updateReminder(updatedReminderData);
