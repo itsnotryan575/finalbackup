@@ -71,8 +71,8 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
   const modalTheme = {
     ...theme,
     inputText: isDark ? '#f0f0f0' : '#000000',
-    inputBackground: isDark ? '#44444C' : '#FFFFFF',
-    inputBorder: isDark ? '#333333' : '#CCCCCC',
+    inputBackground: isDark ? '#44444C' : '#F0F4F0',
+    inputBorder: isDark ? '#333333' : '#BDBDBD',
     placeholderColor: isDark ? '#8C8C8C' : '#666666',
   };
   

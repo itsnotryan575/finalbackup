@@ -10,9 +10,9 @@ export default function NotFoundScreen() {
   const { isDark } = useTheme();
 
   const theme = {
-    text: '#f0f0f0',
-    background: isDark ? '#0B0909' : '#003C24',
-    primary: isDark ? '#8C8C8C' : '#f0f0f0',
+    text: isDark ? '#f0f0f0' : '#000000',
+    background: isDark ? '#0B0909' : '#E8F5E9',
+    primary: isDark ? '#8C8C8C' : '#666666',
     secondary: isDark ? '#4A5568' : '#012d1c',
   };
 

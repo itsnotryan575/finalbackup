@@ -86,12 +86,12 @@ export default function CreateProfile() {
 
   const theme = {
     text: isDark ? '#f0f0f0' : '#000000',
-    background: isDark ? '#0B0909' : '#F0F0F0',
+    background: isDark ? '#0B0909' : '#E8F5E9',
     primary: isDark ? '#f0f0f0' : '#666666',
     secondary: isDark ? '#4A5568' : '#012d1c',
-    accent: isDark ? '#44444C' : '#F8F8F8',
-    cardBackground: isDark ? '#1A1A1A' : '#FFFFFF',
-    border: isDark ? '#333333' : '#E0E0E0',
+    accent: isDark ? '#44444C' : '#F0F4F0',
+    cardBackground: isDark ? '#1A1A1A' : '#DCE7DC',
+    border: isDark ? '#333333' : '#BDBDBD',
     isDark,
   };
 

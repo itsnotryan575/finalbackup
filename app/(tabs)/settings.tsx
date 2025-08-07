@@ -10,12 +10,12 @@ export default function SettingsScreen() {
   const { signOut } = useAuth();
 
   const theme = {
-    background: isDark ? '#0B0909' : '#003C24',
-    cardBackground: isDark ? '#1A1A1A' : '#002818',
-    text: '#f0f0f0',
+    background: isDark ? '#0B0909' : '#E8F5E9',
+    cardBackground: isDark ? '#1A1A1A' : '#DCE7DC',
+    text: isDark ? '#f0f0f0' : '#000000',
     secondaryText: '#f0f0f0',
-    border: isDark ? '#2A2A2A' : '#012d1c',
-    primary: '#f0f0f0',
+    border: isDark ? '#2A2A2A' : '#BDBDBD',
+    primary: isDark ? '#8C8C8C' : '#666666',
   };
 
   const settingsItems = [
