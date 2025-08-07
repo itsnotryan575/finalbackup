@@ -150,7 +150,7 @@ export default function ProfileDetail() {
           ]}>
             {getRelationshipIcon(profile.relationship)}
             <Text style={[styles.relationshipText, { 
-              color: isDark ? '#FFFFFF' : theme.text 
+              color: isDark ? '#FFFFFF' : '#374151' 
             }]}>
               {profile.relationship?.charAt(0).toUpperCase() + profile.relationship?.slice(1)}
             </Text>
