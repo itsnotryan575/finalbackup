@@ -239,7 +239,10 @@ export function ProfileCard({ profile, onPress, onDelete, theme }: ProfileCardPr
                             : (typeof tag === 'object' && tag.color ? tag.color.light : theme.accent)
                         }
                       ]}>
-                        <Tag size={10} color={theme.primary} />
+                        <Tag size={10} color={
+                          theme.isDark ? '#FFFFFF' : 
+                          (typeof tag === 'object' && tag.color ? tag.color.text : theme.text)
+                        } />
                         <Text style={[
                           styles.tagChipText, 
                           { 
