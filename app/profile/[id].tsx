@@ -362,7 +362,8 @@ export default function ProfileDetail() {
                   style={[
                     styles.tag, 
                     { 
-                <Tag size={12} color={isDark ? '#FFFFFF' : '#374151'} />
+                      backgroundColor: isDark ? '#374151' : '#F3F4F6'
+                    }
                   ]}
                 >
                   <Tag size={12} color={
