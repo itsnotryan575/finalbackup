@@ -230,7 +230,7 @@ export function ProfileCard({ profile, onPress, onDelete, theme }: ProfileCardPr
               <View style={styles.additionalInfo}>
                 {profile.tags && profile.tags.length > 0 && (
                   <View style={styles.tagsContainer}>
-                    {profile.tags.slice(0, 2).map((tag, index) => (
+                       <Tag size={10} color={theme.isDark ? theme.primary : '#374151'} />
                       <View key={index} style={[
                         styles.tagChip, 
                         { 
