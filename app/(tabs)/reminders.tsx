@@ -30,15 +30,15 @@ export default function RemindersScreen() {
   const { isDark } = useTheme();
 
   const colors = {
-    background: isDark ? '#0B0909' : '#F0F0F0',
-    surface: isDark ? '#1A1A1A' : '#FFFFFF',
-    cardBackground: isDark ? '#1A1A1A' : '#FFFFFF',
-    text: isDark ? '#f0f0f0' : '#000000',
-    textSecondary: isDark ? '#f0f0f0' : '#666666',
-    primary: isDark ? '#f0f0f0' : '#000000',
+    background: isDark ? '#0B0909' : '#003C24',
+    surface: isDark ? '#1A1A1A' : '#002818',
+    cardBackground: isDark ? '#1A1A1A' : '#002818',
+    text: '#f0f0f0',
+    textSecondary: '#f0f0f0',
+    primary: '#f0f0f0',
     secondary: isDark ? '#6B7280' : '#012d1c',
-    accent: isDark ? '#3B82F6' : '#F8F8F8',
-    border: isDark ? '#2A2A2A' : '#E0E0E0',
+    accent: isDark ? '#3B82F6' : '#012d1c',
+    border: isDark ? '#2A2A2A' : '#012d1c',
   };
 
   useEffect(() => {

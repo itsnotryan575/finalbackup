@@ -59,14 +59,14 @@ export default function EditProfile() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const theme = {
-    text: isDark ? '#f0f0f0' : '#000000',
-    background: isDark ? '#0B0909' : '#F0F0F0',
-    primary: isDark ? '#8C8C8C' : '#666666',
+    text: '#f0f0f0',
+    background: isDark ? '#0B0909' : '#003C24',
+    primary: isDark ? '#8C8C8C' : '#8C8C8C',
     secondary: isDark ? '#4A5568' : '#012d1c',
-    accent: isDark ? '#44444C' : '#F8F8F8',
-    cardBackground: isDark ? '#1A1A1A' : '#FFFFFF',
-    border: isDark ? '#333333' : '#E0E0E0',
-    inputText: isDark ? '#f0f0f0' : '#000000',
+    accent: isDark ? '#44444C' : '#f0f0f0',
+    cardBackground: isDark ? '#1A1A1A' : '#002818',
+    border: isDark ? '#333333' : '#012d1c',
+    inputText: isDark ? '#f0f0f0' : '#003C24',
     isDark,
   };
 
