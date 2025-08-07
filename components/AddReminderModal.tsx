@@ -66,6 +66,15 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
   const minuteScrollRef = useRef<ScrollView>(null);
   const [calendarDate, setCalendarDate] = useState(new Date());
   
+  // Enhanced theme for better light mode visibility
+  const modalTheme = {
+    ...theme,
+    inputText: theme.isDark ? '#f0f0f0' : '#003C24',
+    inputBackground: theme.isDark ? theme.cardBackground : '#f0f0f0',
+    inputBorder: theme.isDark ? theme.border : '#8C8C8C',
+    placeholderColor: theme.isDark ? theme.primary : '#8C8C8C',
+  };
+  
   useEffect(() => {
     if (visible) {
       loadProfiles();
@@ -666,11 +675,11 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
             <View style={styles.section}>
               <Text style={[styles.label, { color: theme.text }]}>Title *</Text>
               <TextInput
-                style={[styles.input, { backgroundColor: theme.cardBackground, color: theme.text, borderColor: theme.border }]}
+                style={[styles.input, { backgroundColor: modalTheme.inputBackground, color: modalTheme.inputText, borderColor: modalTheme.inputBorder }]}
                 value={title}
                 onChangeText={setTitle}
                 placeholder="Enter reminder title..."
-                placeholderTextColor={theme.primary}
+                placeholderTextColor={modalTheme.placeholderColor}
               />
             </View>
 
@@ -678,11 +687,11 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
             <View style={styles.section}>
               <Text style={[styles.label, { color: theme.text }]}>Description</Text>
               <TextInput
-                style={[styles.textArea, { backgroundColor: theme.cardBackground, color: theme.text, borderColor: theme.border }]}
+                style={[styles.textArea, { backgroundColor: modalTheme.inputBackground, color: modalTheme.inputText, borderColor: modalTheme.inputBorder }]}
                 value={description}
                 onChangeText={setDescription}
                 placeholder="Add details about this reminder..."
-                placeholderTextColor={theme.primary}
+                placeholderTextColor={modalTheme.placeholderColor}
                 multiline
                 numberOfLines={3}
               />
@@ -720,41 +729,41 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
             <View style={styles.section}>
               <Text style={[styles.label, { color: theme.text }]}>Attach to Profile (Optional)</Text>
               <TouchableOpacity
-                style={[styles.profileSelector, { backgroundColor: theme.cardBackground, borderColor: theme.border }]}
+                style={[styles.profileSelector, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
                 onPress={() => setShowProfilePicker(!showProfilePicker)}
               >
                 <User size={20} color={theme.primary} />
-                <Text style={[styles.profileSelectorText, { color: theme.text }]}>
+                <Text style={[styles.profileSelectorText, { color: modalTheme.inputText }]}>
                   {getSelectedProfileName()}
                 </Text>
               </TouchableOpacity>
 
               {showProfilePicker && (
-                <View style={[styles.profilePicker, { backgroundColor: theme.background, borderColor: theme.border }]}>
+                <View style={[styles.profilePicker, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}>
                   <TouchableOpacity
-                    style={[styles.profileOption, { borderBottomColor: theme.border }]}
+                    style={[styles.profileOption, { borderBottomColor: modalTheme.inputBorder }]}
                     onPress={() => {
                       setSelectedProfile(null);
                       setShowProfilePicker(false);
                     }}
                   >
-                    <Text style={[styles.profileOptionText, { color: theme.primary }]}>
+                    <Text style={[styles.profileOptionText, { color: modalTheme.placeholderColor }]}>
                       No profile
                     </Text>
                   </TouchableOpacity>
                   {profiles.map((profile) => (
                     <TouchableOpacity
                       key={profile.id}
-                      style={[styles.profileOption, { borderBottomColor: theme.border }]}
+                      style={[styles.profileOption, { borderBottomColor: modalTheme.inputBorder }]}
                       onPress={() => {
                         setSelectedProfile(profile.id);
                         setShowProfilePicker(false);
                       }}
                     >
-                      <Text style={[styles.profileOptionText, { color: theme.text }]}>
+                      <Text style={[styles.profileOptionText, { color: modalTheme.inputText }]}>
                         {profile.name}
                       </Text>
-                      <Text style={[styles.profileOptionRelation, { color: theme.primary }]}>
+                      <Text style={[styles.profileOptionRelation, { color: modalTheme.placeholderColor }]}>
                         {profile.relationship}
                       </Text>
                     </TouchableOpacity>
@@ -772,10 +781,10 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
                 {QUICK_DATES.map((quickDate) => (
                   <TouchableOpacity
                     key={quickDate.label}
-                    style={[styles.quickDateOption, { backgroundColor: theme.cardBackground, borderColor: theme.border }]}
+                    style={[styles.quickDateOption, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
                     onPress={() => setQuickDate(quickDate.days)}
                   >
-                    <Text style={[styles.quickDateText, { color: theme.text }]}>
+                    <Text style={[styles.quickDateText, { color: modalTheme.inputText }]}>
                       {quickDate.label}
                     </Text>
                   </TouchableOpacity>
@@ -785,26 +794,26 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
               {/* Date and Time Selectors */}
               <View style={styles.dateTimeRow}>
                 <TouchableOpacity
-                  style={[styles.dateSelector, { backgroundColor: theme.cardBackground, borderColor: theme.border }]}
+                  style={[styles.dateSelector, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
                   onPress={() => {
                     console.log('Date selector pressed');
                     setShowCalendar(true);
                   }}
                 >
                   <Calendar size={20} color={theme.primary} />
-                  <Text style={[styles.dateSelectorText, { color: theme.text }]}>
+                  <Text style={[styles.dateSelectorText, { color: modalTheme.inputText }]}>
                     {scheduledDate ? formatDisplayDate(scheduledDate) : 'Select Date'}
                   </Text>
                 </TouchableOpacity>
 
                 <TouchableOpacity
-                  style={[styles.timeSelector, { backgroundColor: theme.cardBackground, borderColor: theme.border }]}
+                  style={[styles.timeSelector, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
                   onPress={() => {
                     setShowTimePicker(true);
                   }}
                 >
                   <Clock size={20} color={theme.primary} />
-                  <Text style={[styles.timeSelectorText, { color: theme.text }]}>
+                  <Text style={[styles.timeSelectorText, { color: modalTheme.inputText }]}>
                     {`${displayHour}:${displayMinute} ${selectedAmPm}`}
                   </Text>
                 </TouchableOpacity>
@@ -815,10 +824,10 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
           {/* Footer */}
           <View style={[styles.footer, { borderTopColor: theme.border }]}>
             <TouchableOpacity
-              style={[styles.cancelButton, { backgroundColor: theme.cardBackground, borderColor: theme.border }]}
+              style={[styles.cancelButton, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
               onPress={handleClose}
             >
-              <Text style={[styles.cancelButtonText, { color: theme.text }]}>Cancel</Text>
+              <Text style={[styles.cancelButtonText, { color: modalTheme.inputText }]}>Cancel</Text>
             </TouchableOpacity>
             
             <TouchableOpacity
