@@ -231,16 +231,29 @@ export function ProfileCard({ profile, onPress, onDelete, theme }: ProfileCardPr
                 {profile.tags && profile.tags.length > 0 && (
                   <View style={styles.tagsContainer}>
                     {profile.tags.slice(0, 2).map((tag, index) => (
-                      <View key={index} style={[styles.tagChip, { backgroundColor: theme.accent }]}>
+                      <View key={index} style={[
+                        styles.tagChip, 
+                        { 
+                          backgroundColor: theme.isDark 
+                            ? (typeof tag === 'object' && tag.color ? tag.color.dark : theme.accent)
+                            : (typeof tag === 'object' && tag.color ? tag.color.light : theme.accent)
+                        }
+                      ]}>
                         <Tag size={10} color={theme.primary} />
-                        <Text style={[styles.tagChipText, { color: theme.primary }]}>
+                        <Text style={[
+                          styles.tagChipText, 
+                          { 
+                            color: theme.isDark ? '#FFFFFF' : 
+                            (typeof tag === 'object' && tag.color ? tag.color.text : theme.primary)
+                          }
+                        ]}>
                           {typeof tag === 'string' ? tag : tag.text}
                         </Text>
                       </View>
                     ))}
                     {profile.tags.length > 2 && (
                       <View style={[styles.tagChip, { backgroundColor: theme.accent }]}>
-                        <Text style={[styles.tagChipText, { color: theme.primary }]}>
+                        <Text style={[styles.tagChipText, { color: theme.isDark ? '#FFFFFF' : theme.primary }]}>
                           +{profile.tags.length - 2}
                         </Text>
                       </View>
