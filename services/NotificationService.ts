@@ -74,6 +74,12 @@ class NotificationServiceClass {
       console.log('Current time:', now.toLocaleString());
       console.log('Time difference (ms):', scheduledDate.getTime() - now.getTime());
       
+      // Enhanced debugging
+      console.log('🔍 DETAILED DEBUG - Scheduled Date ISO:', scheduledDate.toISOString());
+      console.log('🔍 DETAILED DEBUG - Current Date ISO:', now.toISOString());
+      console.log('🔍 DETAILED DEBUG - Time difference (ms):', scheduledDate.getTime() - now.getTime());
+      console.log('🔍 DETAILED DEBUG - Time difference (minutes):', (scheduledDate.getTime() - now.getTime()) / (1000 * 60));
+      
       if (scheduledDate <= now) {
         console.warn('Cannot schedule notification for past date:', scheduledDate);
         return null;
@@ -90,22 +96,37 @@ class NotificationServiceClass {
         sound: 'default',
         priority: Notifications.AndroidNotificationPriority.HIGH,
       };
+      
+      console.log('🔍 DETAILED DEBUG - Notification Content:', JSON.stringify(notificationContent, null, 2));
 
       // Schedule the notification with proper trigger
+      const triggerObject = {
+        date: scheduledDate,
+      };
+      
+      console.log('🔍 DETAILED DEBUG - Trigger Object:', JSON.stringify({
+        date: scheduledDate.toISOString(),
+        dateType: typeof scheduledDate,
+        isValidDate: scheduledDate instanceof Date && !isNaN(scheduledDate.getTime())
+      }, null, 2));
+      
       const notificationId = await Notifications.scheduleNotificationAsync({
         content: notificationContent,
-        trigger: {
-          date: scheduledDate,
-        },
+        trigger: triggerObject,
       });
 
       console.log(`Scheduled notification ${notificationId} for reminder ${reminder.id} at ${scheduledDate.toLocaleString()}`);
+      console.log('🔍 DETAILED DEBUG - Returned notification ID:', notificationId);
       
       // Verify the notification was scheduled correctly
       const scheduledNotifications = await this.getScheduledNotifications();
+      console.log('🔍 DETAILED DEBUG - All scheduled notifications count:', scheduledNotifications.length);
       const ourNotification = scheduledNotifications.find(n => n.identifier === notificationId);
       if (ourNotification) {
         console.log('Notification verified in schedule:', ourNotification.trigger);
+        console.log('🔍 DETAILED DEBUG - Our notification trigger details:', JSON.stringify(ourNotification.trigger, null, 2));
+      } else {
+        console.log('🔍 DETAILED DEBUG - Our notification NOT found in scheduled list!');
       }
       
       return notificationId;
