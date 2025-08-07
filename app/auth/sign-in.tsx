@@ -144,7 +144,7 @@ export default function SignInScreen() {
 
             {/* Forgot Password Link */}
             <TouchableOpacity onPress={navigateToForgotPassword}>
-              <Text style={[styles.forgotPasswordText, { color: theme.secondary }]}>
+              <Text style={[styles.forgotPasswordText, { color: isDark ? theme.secondary : '#eddfcc' }]}>
                 Forgot your password?
               </Text>
             </TouchableOpacity>
