@@ -85,11 +85,11 @@ export default function CreateProfile() {
   const [selectedImage, setSelectedImage] = useState(null);
 
   const theme = {
-    text: '#f0f0f0',
+    text: isDark ? '#f0f0f0' : '#003C24',
     background: isDark ? '#0B0909' : '#003C24',
-    primary: '#f0f0f0',
+    primary: isDark ? '#f0f0f0' : '#6B7280',
     secondary: isDark ? '#4A5568' : '#012d1c',
-    accent: isDark ? '#44444C' : '#002818',
+    accent: isDark ? '#44444C' : '#F9FAFB',
     cardBackground: isDark ? '#1A1A1A' : '#002818',
     border: isDark ? '#333333' : '#012d1c',
     isDark,
