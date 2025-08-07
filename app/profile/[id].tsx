@@ -369,9 +369,8 @@ export default function ProfileDetail() {
                   ]}
                 >
                   <Tag size={12} color={
-                    typeof tag === 'object' && tag.color 
-                      ? tag.color.text 
-                      : (isDark ? '#FFFFFF' : '#374151')
+                    isDark ? '#FFFFFF' : 
+                    (typeof tag === 'object' && tag.color ? tag.color.text : theme.text)
                   } />
                   <Text style={[
                     styles.tagText, 
