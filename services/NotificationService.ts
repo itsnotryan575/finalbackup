@@ -95,7 +95,7 @@ class NotificationServiceClass {
       const notificationId = await Notifications.scheduleNotificationAsync({
         content: notificationContent,
         trigger: {
-          date: scheduledDate,
+          date: scheduledDate.getTime(),
         },
       });
 
