@@ -206,7 +206,7 @@ export function ProfileCard({ profile, onPress, onDelete, theme }: ProfileCardPr
                 ]}>
                   {getRelationshipIcon(profile.relationship)}
                   <Text style={[styles.relationshipText, { 
-                    color: theme.isDark ? '#FFFFFF' : theme.text 
+                    color: theme.isDark ? '#FFFFFF' : '#374151' 
                   }]}>
                     {profile.relationship.charAt(0).toUpperCase() + profile.relationship.slice(1)}
                   </Text>
