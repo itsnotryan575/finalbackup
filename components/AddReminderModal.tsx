@@ -45,6 +45,7 @@ const QUICK_DATES = [
 ];
 
 export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: AddReminderModalProps) {
+  const { isDark } = useTheme();
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
   const [selectedType, setSelectedType] = useState('general');
