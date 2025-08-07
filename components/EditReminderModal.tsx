@@ -622,10 +622,10 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
 
             <View style={styles.calendarFooter}>
               <TouchableOpacity
-                style={[styles.calendarButton, { backgroundColor: theme.accent, borderColor: theme.border }]}
+                style={[styles.calendarButton, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
                 onPress={() => setShowCalendar(false)}
               >
-                <Text style={[styles.calendarButtonText, { color: theme.text }]}>Cancel</Text>
+                <Text style={[styles.calendarButtonText, { color: modalTheme.inputText }]}>Cancel</Text>
               </TouchableOpacity>
             </View>
           </View>
@@ -790,10 +790,10 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
 
           <View style={[styles.footer, { borderTopColor: theme.border }]}>
             <TouchableOpacity
-              style={[styles.cancelButton, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
+              style={[styles.cancelButton, { backgroundColor: theme.cardBackground, borderColor: theme.border }]}
               onPress={handleClose}
             >
-              <Text style={[styles.cancelButtonText, { color: modalTheme.inputText }]}>Cancel</Text>
+              <Text style={[styles.cancelButtonText, { color: theme.text }]}>Cancel</Text>
             </TouchableOpacity>
             
             <TouchableOpacity
