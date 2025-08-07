@@ -582,10 +582,10 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
               <ChevronRight size={24} color={theme.primary} />
             </TouchableOpacity>
           </View>
-
+                  style={[styles.quickDateOption, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
           <View style={styles.calendarContent}>
             <View style={styles.weekDays}>
-              {['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'].map((day) => (
+                  <Text style={[styles.quickDateText, { color: modalTheme.inputText }]}>
                 <Text key={day} style={[styles.weekDayText, { color: theme.primary }]}>
                   {day}
                 </Text>

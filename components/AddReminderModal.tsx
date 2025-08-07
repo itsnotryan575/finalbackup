@@ -642,10 +642,10 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
 
             <View style={styles.calendarFooter}>
               <TouchableOpacity
-                style={[styles.calendarButton, { backgroundColor: theme.accent, borderColor: theme.border }]}
+                style={[styles.calendarButton, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
                 onPress={() => setShowCalendar(false)}
               >
-                <Text style={[styles.calendarButtonText, { color: theme.text }]}>Cancel</Text>
+                <Text style={[styles.calendarButtonText, { color: modalTheme.inputText }]}>Cancel</Text>
               </TouchableOpacity>
             </View>
           </View>
