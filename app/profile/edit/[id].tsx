@@ -759,7 +759,7 @@ export default function EditProfile() {
                     style={[styles.customColorButton, { backgroundColor: theme.border }]}
                     onPress={() => setShowCustomColorForm(false)}
                   >
-                    <Text style={[styles.customColorButtonText, { color: theme.text }]}>Cancel</Text>
+                    <Text style={[styles.customColorButtonText, { color: isDark ? theme.text : '#003C24' }]}>Cancel</Text>
                   </TouchableOpacity>
                   
                   <TouchableOpacity

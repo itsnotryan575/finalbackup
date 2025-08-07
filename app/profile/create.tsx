@@ -625,7 +625,7 @@ export default function CreateProfile() {
         <View style={[styles.section, { backgroundColor: theme.cardBackground }]}>
           <Text style={[styles.sectionTitle, { color: theme.text }]}>Other Notes</Text>
           <TextInput
-            style={[styles.textArea, { backgroundColor: theme.accent, color: theme.text, borderColor: theme.border }]}
+            style={[styles.textArea, { backgroundColor: theme.accent, color: theme.inputText, borderColor: theme.border }]}
             value={profile.notes || ''}
             onChangeText={(text) => updateField('notes', text)}
             placeholder="Add notes about this person..."
