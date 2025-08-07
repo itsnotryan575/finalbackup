@@ -708,7 +708,7 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
                     style={[
                       styles.typeOption,
                       {
-                        backgroundColor: selectedType === type.key ? type.color : (theme.isDark ? '#4A5568' : '#012d1c'),
+                        backgroundColor: selectedType === type.key ? type.color : (isDark ? '#374151' : '#E5E7EB'),
                         borderColor: theme.border,
                       }
                     ]}
@@ -717,7 +717,7 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
                     <Tag size={16} color={selectedType === type.key ? '#FFFFFF' : '#FFFFFF'} />
                     <Text style={[
                       styles.typeOptionText,
-                      { color: selectedType === type.key ? '#FFFFFF' : '#FFFFFF' }
+                      { color: selectedType === type.key ? '#FFFFFF' : (isDark ? theme.text : '#374151') }
                     ]}>
                       {type.label}
                     </Text>
