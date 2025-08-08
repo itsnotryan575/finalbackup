@@ -154,7 +154,7 @@ export default function ForgotPasswordScreen() {
               Remember your password?
             </Text>
             <TouchableOpacity onPress={() => router.replace('/auth/sign-in')}>
-              <Text style={[styles.signInLink, { color: '#eddfcc' }]}>
+              <Text style={[styles.signInLink, { color: theme.text }]}>
                 Sign In
               </Text>
             </TouchableOpacity>

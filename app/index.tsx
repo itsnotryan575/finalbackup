@@ -15,6 +15,16 @@ export default function Index() {
   const [showUsageSelection, setShowUsageSelection] = useState(false);
   const [isUsageSelectionLoading, setIsUsageSelectionLoading] = useState(true);
 
+  console.log('🔍 DEBUG: Index component state:', {
+    userEmail: user?.email,
+    emailConfirmed: user?.email_confirmed_at,
+    loading,
+    showDevNote,
+    showUsageSelection,
+    isDevNoteStatusLoading,
+    isUsageSelectionLoading
+  });
+
   console.log('Index - User:', user?.email, 'Confirmed:', user?.email_confirmed_at, 'Loading:', loading);
 
   const theme = {
@@ -30,6 +40,7 @@ export default function Index() {
       checkDevNoteStatus();
     } else {
       // User is not confirmed, don't show dev note and clear loading state
+      console.log('🔍 DEBUG: User not confirmed, clearing modal states');
       setShowDevNote(false);
       setIsDevNoteStatusLoading(false);
       setShowUsageSelection(false);
@@ -56,6 +67,7 @@ export default function Index() {
       console.log('🔍 DEBUG: Dev note check completed');
     } catch (error) {
       console.error('Error checking dev note status:', error);
+      console.log('🔍 DEBUG: Error in checkDevNoteStatus, resetting states');
       setShowDevNote(false);
       setShowUsageSelection(false);
     } finally {
@@ -79,6 +91,7 @@ export default function Index() {
       console.log('🔍 DEBUG: Usage selection check completed');
     } catch (error) {
       console.error('Error checking usage selection status:', error);
+      console.log('🔍 DEBUG: Error in checkUsageSelectionStatus, resetting state');
       setShowUsageSelection(false);
     } finally {
       setIsUsageSelectionLoading(false);
@@ -93,10 +106,12 @@ export default function Index() {
       }
       setShowDevNote(false);
       // After dev note closes, check if we need to show usage selection
+      console.log('🔍 DEBUG: Dev note closed, checking usage selection status...');
       await checkUsageSelectionStatus();
       console.log('🔍 DEBUG: Dev note closed');
     } catch (error) {
       console.error('Error saving dev note preference:', error);
+      console.log('🔍 DEBUG: Error in handleDevNoteClose, resetting states');
       setShowDevNote(false);
       setShowUsageSelection(false);
     }
@@ -110,10 +125,13 @@ export default function Index() {
       console.log('🔍 DEBUG: Usage selection preference saved');
     } catch (error) {
       console.error('Error saving usage selection preference:', error);
+      console.log('🔍 DEBUG: Error in handleUsageSelectionComplete, resetting state');
       setShowUsageSelection(false);
     }
   };
+  
   if (loading || isDevNoteStatusLoading || isUsageSelectionLoading) {
+    console.log('🔍 DEBUG: Still loading, showing loading screen');
     return (
       <View style={[styles.container, { backgroundColor: theme.background }]}>
         <Text style={[styles.loadingText, { color: theme.text }]}>
