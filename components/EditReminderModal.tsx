@@ -178,7 +178,7 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
           id: reminder.id,
           title: title.trim(),
           description: description.trim() || null,
-          scheduledFor: scheduledDateTime.toISOString(),
+          scheduledFor: scheduledDateTime,
           profileName,
         });
         

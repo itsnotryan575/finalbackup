@@ -55,7 +55,7 @@ class NotificationServiceClass {
     id: number;
     title: string;
     description?: string;
-    scheduledFor: string;
+    scheduledFor: Date;
     profileName?: string;
   }) {
     try {
@@ -66,8 +66,8 @@ class NotificationServiceClass {
         }
       }
 
-      // Parse the scheduled date and ensure it's in the future
-      const scheduledDate = new Date(reminder.scheduledFor);
+      // Use the scheduled date directly and ensure it's in the future
+      const scheduledDate = reminder.scheduledFor;
       const now = new Date();
 
       console.log('Scheduling notification for:', scheduledDate.toLocaleString());
@@ -79,6 +79,14 @@ class NotificationServiceClass {
       console.log('🔍 DETAILED DEBUG - Current Date ISO:', now.toISOString());
       console.log('🔍 DETAILED DEBUG - Time difference (ms):', scheduledDate.getTime() - now.getTime());
       console.log('🔍 DETAILED DEBUG - Time difference (minutes):', (scheduledDate.getTime() - now.getTime()) / (1000 * 60));
+      console.log('🔍 DETAILED DEBUG - Scheduled Date Local Components:', {
+        year: scheduledDate.getFullYear(),
+        month: scheduledDate.getMonth(),
+        day: scheduledDate.getDate(),
+        hour: scheduledDate.getHours(),
+        minute: scheduledDate.getMinutes(),
+        second: scheduledDate.getSeconds()
+      });
       
       if (scheduledDate <= now) {
         console.warn('Cannot schedule notification for past date:', scheduledDate);

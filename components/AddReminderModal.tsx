@@ -165,7 +165,7 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
           id: reminderId,
           title: title.trim(),
           description: description.trim() || null,
-          scheduledFor: scheduledDateTime.toISOString(),
+          scheduledFor: scheduledDateTime,
           profileName,
         });
         
