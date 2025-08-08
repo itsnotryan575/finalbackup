@@ -144,7 +144,7 @@ export default function SignInScreen() {
 
             {/* Forgot Password Link */}
             <TouchableOpacity onPress={navigateToForgotPassword}>
-              <Text style={[styles.forgotPasswordText, { color: isDark ? theme.secondary : '#eddfcc' }]}>
+              <Text style={[styles.forgotPasswordText, { color: isDark ? theme.text : '#eddfcc' }]}>
                 Forgot your password?
               </Text>
             </TouchableOpacity>
@@ -172,7 +172,7 @@ export default function SignInScreen() {
               Don't have an account?
             </Text>
             <TouchableOpacity onPress={navigateToSignUp}>
-              <Text style={[styles.signUpLink, { color: '#eddfcc' }]}>
+              <Text style={[styles.signUpLink, { color: isDark ? theme.text : '#eddfcc' }]}>
                 Sign Up
               </Text>
             </TouchableOpacity>
