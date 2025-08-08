@@ -101,7 +101,7 @@ class NotificationServiceClass {
           reminderId: reminder.id,
           type: 'reminder',
         },
-        sound: null,
+        sound: true,
         priority: Notifications.AndroidNotificationPriority.HIGH,
       };
       
