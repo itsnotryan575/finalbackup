@@ -767,7 +767,7 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
 
             {/* Profile Selection */}
             <View style={styles.section}>
-              <Text style={[styles.label, { color: theme.text }]}>Attach to Profile (Optional)</Text>
+              <Text style={[styles.label, { color: theme.text }]}>Assign To Profile (Optional)</Text>
               <TouchableOpacity
                 style={[styles.profileSelector, { backgroundColor: modalTheme.inputBackground, borderColor: modalTheme.inputBorder }]}
                 onPress={() => setShowProfilePicker(!showProfilePicker)}
