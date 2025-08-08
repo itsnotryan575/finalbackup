@@ -210,32 +210,28 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
     const date = new Date();
     
     if (days === 0) {
-      // For "Today", check if it's already past a reasonable time (6 PM)
+      // For "Today", always use today's date but set a reasonable future time
       const currentHour = now.getHours();
-      if (currentHour >= 18) {
-        // If it's already 6 PM or later, schedule for tomorrow at 9 AM
-        date.setDate(date.getDate() + 1);
-        date.setHours(9, 0, 0, 0);
+      if (currentHour >= 22) {
+        // If it's already 10 PM or later, schedule for tomorrow at 9 AM
+        date.setDate(now.getDate() + 1);
         setDisplayHour('09');
         setDisplayMinute('00');
         setSelectedAmPm('AM');
-        setScheduledTime('09:00');
       } else {
-        // If it's before 6 PM, schedule for today at 6 PM
-        date.setHours(18, 0, 0, 0);
-        setDisplayHour('06');
+        // If it's before 10 PM, schedule for today at a reasonable future time
+        const suggestedHour = Math.max(currentHour + 1, 19); // At least 1 hour from now, or 7 PM
+        date.setDate(now.getDate()); // Explicitly set to today's date
+        setDisplayHour(suggestedHour > 12 ? (suggestedHour - 12).toString().padStart(2, '0') : suggestedHour.toString().padStart(2, '0'));
         setDisplayMinute('00');
-        setSelectedAmPm('PM');
-        setScheduledTime('06:00');
+        setSelectedAmPm(suggestedHour >= 12 ? 'PM' : 'AM');
       }
     } else {
       // For other quick dates, set to 12:00 PM
       date.setDate(date.getDate() + days);
-      date.setHours(12, 0, 0, 0);
       setDisplayHour('12');
       setDisplayMinute('00');
       setSelectedAmPm('PM');
-      setScheduledTime('12:00');
     }
     
     // Use local date components to avoid timezone issues
@@ -244,7 +240,6 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
     const day = date.getDate().toString().padStart(2, '0');
     setScheduledDate(`${year}-${month}-${day}`);
     setCalendarDate(date);
-    setShowCalendar(false);
   };
 
   const getSelectedProfileName = () => {
