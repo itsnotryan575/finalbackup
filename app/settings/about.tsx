@@ -92,13 +92,13 @@ export default function AboutSettings() {
       items: [
         { 
           label: 'Data Storage', 
-          value: 'Your data is securely stored on your device and may be backed up or processed using secure infrastructure to enhance functionality and ensure a better user experience.',
+          value: 'Your data is stored locally on your device and optionally synced to secure cloud storage',
           multiline: true,
           icon: Shield 
         },
         { 
           label: 'Privacy Policy', 
-          value: 'We value your trust and are committed to handling your information responsibly. Your data may be used to improve our services or offer personalized features. We do not share your personal information with third parties without a valid purpose.',
+          value: 'We respect your privacy and never sell your personal data',
           multiline: true,
           icon: FileText 
         },

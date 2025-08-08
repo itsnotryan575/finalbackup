@@ -413,7 +413,7 @@ export default function SignUpScreen() {
               Already have an account?
             </Text>
             <TouchableOpacity onPress={() => router.replace('/auth/sign-in')}>
-              <Text style={[styles.signInLink, { color: theme.text }]}>
+              <Text style={[styles.signInLink, { color: '#eddfcc' }]}>
                 Sign In
               </Text>
             </TouchableOpacity>
@@ -540,7 +540,6 @@ const styles = StyleSheet.create({
   signInLink: {
     fontSize: 16,
     fontWeight: '600',
-    color: theme.text,
   },
   emailDisplay: {
     alignItems: 'center',
