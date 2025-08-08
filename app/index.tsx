@@ -11,9 +11,11 @@ export default function Index() {
   const { user, loading } = useAuth();
   const { isDark } = useTheme();
   const [showDevNote, setShowDevNote] = useState(false);
-  const [isDevNoteStatusLoading, setIsDevNoteStatusLoading] = useState(true);
+  const [isDevNoteStatusLoading, setIsDevNoteStatusLoading] = useState(false);
   const [showUsageSelection, setShowUsageSelection] = useState(false);
-  const [isUsageSelectionLoading, setIsUsageSelectionLoading] = useState(true);
+  const [isUsageSelectionLoading, setIsUsageSelectionLoading] = useState(false);
+  const [onboardingFlowInitialized, setOnboardingFlowInitialized] = useState(false);
+  const [onboardingFlowComplete, setOnboardingFlowComplete] = useState(false);
 
   console.log('🔍 DEBUG: Index component state:', {
     userEmail: user?.email,
@@ -22,7 +24,9 @@ export default function Index() {
     showDevNote,
     showUsageSelection,
     isDevNoteStatusLoading,
-    isUsageSelectionLoading
+    isUsageSelectionLoading,
+    onboardingFlowInitialized,
+    onboardingFlowComplete
   });
 
   console.log('Index - User:', user?.email, 'Confirmed:', user?.email_confirmed_at, 'Loading:', loading);
@@ -33,20 +37,35 @@ export default function Index() {
     primary: isDark ? '#8C8C8C' : '#f0f0f0',
   };
 
-  // Check dev note status every time user authentication status changes
+  // Initialize onboarding flow when user is confirmed
   useEffect(() => {
-    if (user?.email_confirmed_at) {
-      console.log('🔍 DEBUG: User is authenticated and confirmed, checking dev note status');
-      checkDevNoteStatus();
+    if (user?.email_confirmed_at && !onboardingFlowInitialized) {
+      console.log('🔍 DEBUG: User is authenticated and confirmed, initializing onboarding flow');
+      setOnboardingFlowInitialized(true);
+      setOnboardingFlowComplete(false);
+      initializeOnboardingFlow();
     } else {
-      // User is not confirmed, don't show dev note and clear loading state
-      console.log('🔍 DEBUG: User not confirmed, clearing modal states');
+      // User is not confirmed, reset all onboarding states
+      console.log('🔍 DEBUG: User not confirmed, resetting onboarding states');
       setShowDevNote(false);
-      setIsDevNoteStatusLoading(false);
       setShowUsageSelection(false);
+      setOnboardingFlowInitialized(false);
+      setOnboardingFlowComplete(false);
+      setIsDevNoteStatusLoading(false);
       setIsUsageSelectionLoading(false);
     }
-  }, [user?.email_confirmed_at]);
+  }, [user?.email_confirmed_at, onboardingFlowInitialized]);
+
+  const initializeOnboardingFlow = async () => {
+    console.log('🔍 DEBUG: Starting onboarding flow initialization');
+    try {
+      await checkDevNoteStatus();
+    } catch (error) {
+      console.error('🔍 DEBUG: Error in onboarding flow initialization:', error);
+      // If there's an error, complete the onboarding flow to prevent getting stuck
+      setOnboardingFlowComplete(true);
+    }
+  };
 
   const checkDevNoteStatus = async () => {
     try {
@@ -58,6 +77,7 @@ export default function Index() {
         console.log('🔍 DEBUG: Should show dev note, setting showDevNote to true');
         setShowDevNote(true);
         setShowUsageSelection(false); // Don't show usage selection yet
+        setOnboardingFlowComplete(false); // Onboarding not complete yet
       } else {
         console.log('🔍 DEBUG: User opted out, not showing dev note');
         setShowDevNote(false);
@@ -70,6 +90,7 @@ export default function Index() {
       console.log('🔍 DEBUG: Error in checkDevNoteStatus, resetting states');
       setShowDevNote(false);
       setShowUsageSelection(false);
+      setOnboardingFlowComplete(true); // Complete flow on error to prevent getting stuck
     } finally {
       setIsDevNoteStatusLoading(false);
     }
@@ -84,19 +105,23 @@ export default function Index() {
       if (usageModeSelected !== 'true') {
         console.log('🔍 DEBUG: Should show usage selection, setting showUsageSelection to true');
         setShowUsageSelection(true);
+        setOnboardingFlowComplete(false); // Onboarding not complete yet
       } else {
         console.log('🔍 DEBUG: User already selected usage mode, not showing selection');
         setShowUsageSelection(false);
+        setOnboardingFlowComplete(true); // All onboarding steps complete
       }
       console.log('🔍 DEBUG: Usage selection check completed');
     } catch (error) {
       console.error('Error checking usage selection status:', error);
       console.log('🔍 DEBUG: Error in checkUsageSelectionStatus, resetting state');
       setShowUsageSelection(false);
+      setOnboardingFlowComplete(true); // Complete flow on error to prevent getting stuck
     } finally {
       setIsUsageSelectionLoading(false);
     }
   };
+
   const handleDevNoteClose = async (dontShowAgain: boolean) => {
     console.log('🔍 DEBUG: Dev note closing, dontShowAgain:', dontShowAgain);
     try {
@@ -114,6 +139,7 @@ export default function Index() {
       console.log('🔍 DEBUG: Error in handleDevNoteClose, resetting states');
       setShowDevNote(false);
       setShowUsageSelection(false);
+      setOnboardingFlowComplete(true); // Complete flow on error
     }
   };
 
@@ -122,16 +148,24 @@ export default function Index() {
     try {
       await AsyncStorage.setItem('usage_mode_selected', 'true');
       setShowUsageSelection(false);
+      setOnboardingFlowComplete(true); // Mark onboarding as complete
       console.log('🔍 DEBUG: Usage selection preference saved');
     } catch (error) {
       console.error('Error saving usage selection preference:', error);
       console.log('🔍 DEBUG: Error in handleUsageSelectionComplete, resetting state');
       setShowUsageSelection(false);
+      setOnboardingFlowComplete(true); // Complete flow on error
     }
   };
   
-  if (loading || isDevNoteStatusLoading || isUsageSelectionLoading) {
-    console.log('🔍 DEBUG: Still loading, showing loading screen');
+  // Show loading screen while auth is loading OR onboarding flow is not initialized OR still checking modal statuses
+  if (loading || !onboardingFlowInitialized || isDevNoteStatusLoading || isUsageSelectionLoading) {
+    console.log('🔍 DEBUG: Still loading, showing loading screen', {
+      authLoading: loading,
+      onboardingFlowInitialized,
+      isDevNoteStatusLoading,
+      isUsageSelectionLoading
+    });
     return (
       <View style={[styles.container, { backgroundColor: theme.background }]}>
         <Text style={[styles.loadingText, { color: theme.text }]}>
@@ -141,7 +175,7 @@ export default function Index() {
     );
   }
 
-  if (user && user.email_confirmed_at) {
+  if (user && user.email_confirmed_at && onboardingFlowInitialized) {
     // If dev note should be shown, show the modal
     if (showDevNote) {
       console.log('🔍 DEBUG: Showing dev note modal');
@@ -168,9 +202,20 @@ export default function Index() {
       );
     }
     
-    console.log('🔍 DEBUG: All onboarding modals handled, redirecting to main app');
-    // All onboarding modals have been handled, redirect to main app
-    return <Redirect href="/(tabs)" />;
+    // Only redirect to main app if onboarding flow is complete
+    if (onboardingFlowComplete) {
+      console.log('🔍 DEBUG: All onboarding modals handled, redirecting to main app');
+      return <Redirect href="/(tabs)" />;
+    } else {
+      console.log('🔍 DEBUG: Onboarding flow not complete, waiting...');
+      return (
+        <View style={[styles.container, { backgroundColor: theme.background }]}>
+          <Text style={[styles.loadingText, { color: theme.text }]}>
+            Preparing your experience...
+          </Text>
+        </View>
+      );
+    }
   }
 
   if (user && !user.email_confirmed_at) {

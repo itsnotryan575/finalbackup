@@ -285,5 +285,6 @@ const styles = StyleSheet.create({
   signUpLink: {
     fontSize: 16,
     fontWeight: '600',
+    color: theme.text,
   },
 });

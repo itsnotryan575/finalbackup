@@ -540,6 +540,7 @@ const styles = StyleSheet.create({
   signInLink: {
     fontSize: 16,
     fontWeight: '600',
+    color: theme.text,
   },
   emailDisplay: {
     alignItems: 'center',
