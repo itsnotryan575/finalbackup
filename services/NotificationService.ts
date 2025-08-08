@@ -119,27 +119,15 @@ class NotificationServiceClass {
       
       console.log('🔍 DETAILED DEBUG - Notification Content:', JSON.stringify(notificationContent, null, 2));
 
-      // Schedule the notification with proper trigger
+      // Schedule the notification with Date trigger
       const triggerObject = {
-        year: scheduledDate.getFullYear(),
-        month: scheduledDate.getMonth(), // 0-indexed (0 = January, 11 = December)
-        day: scheduledDate.getDate(),
-        hour: scheduledDate.getHours(),
-        minute: scheduledDate.getMinutes(),
-        second: scheduledDate.getSeconds(),
+        date: scheduledDate,
         ...(Platform.OS === 'android' && { channelId: 'reminders' }),
       };
       
       console.log('🔍 DETAILED DEBUG - Trigger Object:', JSON.stringify(triggerObject, null, 2));
-      console.log('🔍 DETAILED DEBUG - Trigger Date Components:', {
-        year: triggerObject.year,
-        month: triggerObject.month,
-        day: triggerObject.day,
-        hour: triggerObject.hour,
-        minute: triggerObject.minute,
-        second: triggerObject.second,
-        platform: Platform.OS
-      });
+      console.log('🔍 DETAILED DEBUG - Trigger Date:', scheduledDate.toISOString());
+      console.log('🔍 DETAILED DEBUG - Platform:', Platform.OS);
       
       console.log('🔍 DETAILED DEBUG - About to call scheduleNotificationAsync...');
       console.log('🔍 DETAILED DEBUG - Notification content:', JSON.stringify(notificationContent, null, 2));
