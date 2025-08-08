@@ -105,6 +105,9 @@ class NotificationServiceClass {
         console.log(`🔍 BUFFER DEBUG - Time difference sufficient (${timeDifferenceMs}ms), no buffer needed`);
       }
 
+      // Log trigger date and time difference before scheduling
+      console.log('[REM TEST] Trigger date', scheduledDate.toString(), 'ms from now:', scheduledDate.getTime() - Date.now());
+
       // Create notification content
       const notificationContent: Notifications.NotificationContentInput = {
         title: reminder.title,
@@ -117,21 +120,11 @@ class NotificationServiceClass {
         priority: Notifications.AndroidNotificationPriority.HIGH,
       };
       
-      console.log('🔍 DETAILED DEBUG - Notification Content:', JSON.stringify(notificationContent, null, 2));
-
       // Schedule the notification with Date trigger
       const triggerObject = {
         date: scheduledDate,
         ...(Platform.OS === 'android' && { channelId: 'reminders' }),
       };
-      
-      console.log('🔍 DETAILED DEBUG - Trigger Object:', JSON.stringify(triggerObject, null, 2));
-      console.log('🔍 DETAILED DEBUG - Trigger Date:', scheduledDate.toISOString());
-      console.log('🔍 DETAILED DEBUG - Platform:', Platform.OS);
-      
-      console.log('🔍 DETAILED DEBUG - About to call scheduleNotificationAsync...');
-      console.log('🔍 DETAILED DEBUG - Notification content:', JSON.stringify(notificationContent, null, 2));
-      console.log('🔍 DETAILED DEBUG - Trigger object:', JSON.stringify(triggerObject, null, 2));
       
       const notificationId = await Notifications.scheduleNotificationAsync({
         content: notificationContent,
@@ -139,30 +132,14 @@ class NotificationServiceClass {
       });
 
       console.log(`Scheduled notification ${notificationId} for reminder ${reminder.id} at ${scheduledDate.toLocaleString()}`);
-      console.log('🔍 DETAILED DEBUG - Returned notification ID:', notificationId);
-      console.log('🔍 DETAILED DEBUG - Type of notification ID:', typeof notificationId);
-      console.log('🔍 DETAILED DEBUG - Notification ID length:', notificationId ? notificationId.length : 'null');
       
-      // Verify the notification was scheduled correctly
-      console.log('🔍 DETAILED DEBUG - About to check scheduled notifications...');
-      const scheduledNotifications = await this.getScheduledNotifications();
-      console.log('🔍 DETAILED DEBUG - All scheduled notifications count:', scheduledNotifications.length);
-      console.log('🔍 DETAILED DEBUG - All scheduled notification IDs:', scheduledNotifications.map(n => n.identifier));
-      const ourNotification = scheduledNotifications.find(n => n.identifier === notificationId);
-      if (ourNotification) {
-        console.log('Notification verified in schedule:', ourNotification.trigger);
-        console.log('🔍 DETAILED DEBUG - Our notification trigger details:', JSON.stringify(ourNotification.trigger, null, 2));
-        console.log('🔍 DETAILED DEBUG - Our notification content details:', JSON.stringify(ourNotification.content, null, 2));
-      } else {
-        console.log('🔍 DETAILED DEBUG - Our notification NOT found in scheduled list!');
-        console.log('🔍 DETAILED DEBUG - Searching for notification ID in list...');
-        scheduledNotifications.forEach((notif, index) => {
-          console.log(`🔍 DETAILED DEBUG - Scheduled notification ${index}:`, {
-            identifier: notif.identifier,
-            trigger: notif.trigger,
-            content: notif.content?.title
-          });
-        });
+      // Check all scheduled notifications after scheduling
+      const allScheduled = await Notifications.getAllScheduledNotificationsAsync();
+      console.log('[REM TEST] scheduled count:', allScheduled.length, allScheduled);
+      
+      // Check for Expo Go limitation
+      if (allScheduled.length === 0) {
+        console.warn('Expo Go limitation – use a dev build to test timing');
       }
       
       return notificationId;
