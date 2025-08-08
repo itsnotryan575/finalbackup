@@ -15,6 +15,16 @@ export default function RootLayout() {
   const colorScheme = useColorScheme();
   const isDark = colorScheme === 'dark';
 
+  const theme = {
+    background: isDark ? '#000000' : '#ffffff',
+    surface: isDark ? '#1a1a1a' : '#f5f5f5',
+    text: isDark ? '#ffffff' : '#000000',
+    textSecondary: isDark ? '#a0a0a0' : '#666666',
+    primary: isDark ? '#007AFF' : '#007AFF',
+    border: isDark ? '#333333' : '#e0e0e0',
+    card: isDark ? '#2a2a2a' : '#ffffff',
+  };
+
   const gifSource = isDark
     ? require('../assets/gifs/darkloading.gif')
     : require('../assets/gifs/lightloading.gif');
@@ -122,18 +132,18 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'black',
+    backgroundColor: '#000000',
   },
   loadingText: {
     fontSize: 18,
     fontWeight: '600',
-    color: '#f0f0f0',
+    color: '#ffffff',
     textAlign: 'center',
     paddingHorizontal: 20,
   },
   errorSubtext: {
     fontSize: 14,
-    color: '#999',
+    color: '#a0a0a0',
     textAlign: 'center',
     marginTop: 10,
     paddingHorizontal: 20,
