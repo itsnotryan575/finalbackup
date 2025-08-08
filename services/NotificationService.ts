@@ -93,6 +93,18 @@ class NotificationServiceClass {
         return null;
       }
 
+      // Add buffer to ensure notification is scheduled far enough in the future
+      const timeDifferenceMs = scheduledDate.getTime() - now.getTime();
+      const minimumBufferMs = 5000; // 5 seconds
+      
+      if (timeDifferenceMs < minimumBufferMs) {
+        console.log(`🔍 BUFFER DEBUG - Time difference too small (${timeDifferenceMs}ms), adding buffer`);
+        scheduledDate.setTime(now.getTime() + minimumBufferMs);
+        console.log(`🔍 BUFFER DEBUG - Adjusted scheduled time to: ${scheduledDate.toLocaleString()}`);
+      } else {
+        console.log(`🔍 BUFFER DEBUG - Time difference sufficient (${timeDifferenceMs}ms), no buffer needed`);
+      }
+
       // Create notification content
       const notificationContent: Notifications.NotificationContentInput = {
         title: reminder.title,
