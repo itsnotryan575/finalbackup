@@ -91,7 +91,11 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
 
     // Parse the scheduled date and time
     const scheduledDateTime = new Date(reminder.scheduledFor);
-    setScheduledDate(scheduledDateTime.toISOString().split('T')[0]);
+    // Use local date components to avoid timezone issues
+    const year = scheduledDateTime.getFullYear();
+    const month = (scheduledDateTime.getMonth() + 1).toString().padStart(2, '0');
+    const day = scheduledDateTime.getDate().toString().padStart(2, '0');
+    setScheduledDate(`${year}-${month}-${day}`);
     setCalendarDate(scheduledDateTime);
 
     // Extract time components
@@ -215,7 +219,11 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
   const setQuickDate = (days: number) => {
     const date = new Date();
     date.setDate(date.getDate() + days);
-    setScheduledDate(date.toISOString().split('T')[0]);
+    // Use local date components to avoid timezone issues
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    setScheduledDate(`${year}-${month}-${day}`);
     setCalendarDate(date);
     setShowCalendar(false);
   };
@@ -271,7 +279,11 @@ export function EditReminderModal({ visible, onClose, onReminderUpdated, reminde
   };
 
   const selectCalendarDate = (date: Date) => {
-    setScheduledDate(date.toISOString().split('T')[0]);
+    // Use local date components to avoid timezone issues
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    setScheduledDate(`${year}-${month}-${day}`);
     setCalendarDate(date);
     setShowCalendar(false);
   };

@@ -83,7 +83,11 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
       const defaultDate = new Date();
       defaultDate.setDate(defaultDate.getDate() + 1);
       defaultDate.setHours(12, 0, 0, 0);
-      setScheduledDate(defaultDate.toISOString().split('T')[0]);
+      // Use local date components to avoid timezone issues
+      const year = defaultDate.getFullYear();
+      const month = (defaultDate.getMonth() + 1).toString().padStart(2, '0');
+      const day = defaultDate.getDate().toString().padStart(2, '0');
+      setScheduledDate(`${year}-${month}-${day}`);
       setCalendarDate(defaultDate);
       setDisplayHour('12');
       setDisplayMinute('00');
@@ -234,7 +238,11 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
       setScheduledTime('12:00');
     }
     
-    setScheduledDate(date.toISOString().split('T')[0]);
+    // Use local date components to avoid timezone issues
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    setScheduledDate(`${year}-${month}-${day}`);
     setCalendarDate(date);
     setShowCalendar(false);
   };
@@ -296,7 +304,11 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
   };
 
   const selectCalendarDate = (date: Date) => {
-    setScheduledDate(date.toISOString().split('T')[0]);
+    // Use local date components to avoid timezone issues
+    const year = date.getFullYear();
+    const month = (date.getMonth() + 1).toString().padStart(2, '0');
+    const day = date.getDate().toString().padStart(2, '0');
+    setScheduledDate(`${year}-${month}-${day}`);
     setCalendarDate(date);
     setShowCalendar(false);
   };
