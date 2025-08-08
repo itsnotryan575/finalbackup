@@ -79,15 +79,17 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
   useEffect(() => {
     if (visible) {
       loadProfiles();
-      // Set default date to tomorrow
-      const tomorrow = new Date();
-      tomorrow.setDate(tomorrow.getDate() + 1);
-      setScheduledDate(tomorrow.toISOString().split('T')[0]);
-      setCalendarDate(tomorrow);
+      // Set default date to tomorrow at 12:00 PM
+      const defaultDate = new Date();
+      defaultDate.setDate(defaultDate.getDate() + 1);
+      defaultDate.setHours(12, 0, 0, 0);
+      setScheduledDate(defaultDate.toISOString().split('T')[0]);
+      setCalendarDate(defaultDate);
+      setDisplayHour('12');
+      setDisplayMinute('00');
+      setSelectedAmPm('PM');
       // Initialize display values from scheduledTime
-      const [hour, minute] = scheduledTime.split(':');
-      setDisplayHour(hour);
-      setDisplayMinute(minute);
+      setScheduledTime('12:00');
     }
   }, [visible]);
 
@@ -200,8 +202,38 @@ export function AddReminderModal({ visible, onClose, onReminderAdded, theme }: A
   };
 
   const setQuickDate = (days: number) => {
+    const now = new Date();
     const date = new Date();
-    date.setDate(date.getDate() + days);
+    
+    if (days === 0) {
+      // For "Today", check if it's already past a reasonable time (6 PM)
+      const currentHour = now.getHours();
+      if (currentHour >= 18) {
+        // If it's already 6 PM or later, schedule for tomorrow at 9 AM
+        date.setDate(date.getDate() + 1);
+        date.setHours(9, 0, 0, 0);
+        setDisplayHour('09');
+        setDisplayMinute('00');
+        setSelectedAmPm('AM');
+        setScheduledTime('09:00');
+      } else {
+        // If it's before 6 PM, schedule for today at 6 PM
+        date.setHours(18, 0, 0, 0);
+        setDisplayHour('06');
+        setDisplayMinute('00');
+        setSelectedAmPm('PM');
+        setScheduledTime('06:00');
+      }
+    } else {
+      // For other quick dates, set to 12:00 PM
+      date.setDate(date.getDate() + days);
+      date.setHours(12, 0, 0, 0);
+      setDisplayHour('12');
+      setDisplayMinute('00');
+      setSelectedAmPm('PM');
+      setScheduledTime('12:00');
+    }
+    
     setScheduledDate(date.toISOString().split('T')[0]);
     setCalendarDate(date);
     setShowCalendar(false);
