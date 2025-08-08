@@ -93,7 +93,7 @@ class NotificationServiceClass {
           reminderId: reminder.id,
           type: 'reminder',
         },
-        sound: 'default',
+        sound: null,
         priority: Notifications.AndroidNotificationPriority.HIGH,
       };
       
@@ -121,6 +121,10 @@ class NotificationServiceClass {
         platform: Platform.OS
       });
       
+      console.log('🔍 DETAILED DEBUG - About to call scheduleNotificationAsync...');
+      console.log('🔍 DETAILED DEBUG - Notification content:', JSON.stringify(notificationContent, null, 2));
+      console.log('🔍 DETAILED DEBUG - Trigger object:', JSON.stringify(triggerObject, null, 2));
+      
       const notificationId = await Notifications.scheduleNotificationAsync({
         content: notificationContent,
         trigger: triggerObject,
@@ -128,16 +132,29 @@ class NotificationServiceClass {
 
       console.log(`Scheduled notification ${notificationId} for reminder ${reminder.id} at ${scheduledDate.toLocaleString()}`);
       console.log('🔍 DETAILED DEBUG - Returned notification ID:', notificationId);
+      console.log('🔍 DETAILED DEBUG - Type of notification ID:', typeof notificationId);
+      console.log('🔍 DETAILED DEBUG - Notification ID length:', notificationId ? notificationId.length : 'null');
       
       // Verify the notification was scheduled correctly
+      console.log('🔍 DETAILED DEBUG - About to check scheduled notifications...');
       const scheduledNotifications = await this.getScheduledNotifications();
       console.log('🔍 DETAILED DEBUG - All scheduled notifications count:', scheduledNotifications.length);
+      console.log('🔍 DETAILED DEBUG - All scheduled notification IDs:', scheduledNotifications.map(n => n.identifier));
       const ourNotification = scheduledNotifications.find(n => n.identifier === notificationId);
       if (ourNotification) {
         console.log('Notification verified in schedule:', ourNotification.trigger);
         console.log('🔍 DETAILED DEBUG - Our notification trigger details:', JSON.stringify(ourNotification.trigger, null, 2));
+        console.log('🔍 DETAILED DEBUG - Our notification content details:', JSON.stringify(ourNotification.content, null, 2));
       } else {
         console.log('🔍 DETAILED DEBUG - Our notification NOT found in scheduled list!');
+        console.log('🔍 DETAILED DEBUG - Searching for notification ID in list...');
+        scheduledNotifications.forEach((notif, index) => {
+          console.log(`🔍 DETAILED DEBUG - Scheduled notification ${index}:`, {
+            identifier: notif.identifier,
+            trigger: notif.trigger,
+            content: notif.content?.title
+          });
+        });
       }
       
       return notificationId;
