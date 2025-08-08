@@ -241,7 +241,7 @@ export default function AboutSettings() {
               <Text style={[styles.statusMetricLabel, { color: theme.primary }]}>Development</Text>
             </View>
             <View style={styles.statusMetric}>
-              <Text style={[styles.statusMetricValue, { color: theme.text }]}>Constant</Text>
+              <Text style={[styles.statusMetricValue, { color: theme.text }]}>4-6 Week</Text>
               <Text style={[styles.statusMetricLabel, { color: theme.primary }]}>Updates</Text>
             </View>
           </View>
